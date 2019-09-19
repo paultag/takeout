@@ -31,7 +31,7 @@ func main() {
 			log.Println(err)
 			continue
 		}
-		fmt.Printf("\nconst (\n")
+		fmt.Printf("\nvar (\n")
 		fmt.Printf("	%s []byte = []byte{\n", name)
 
 		for i := 0; i < len(bytes); i = i + perLine {
