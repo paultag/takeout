@@ -21,9 +21,8 @@ func main() {
 `)
 	fmt.Printf("package %s\n", pkg)
 
-	perLine := 10
-
 	for _, filePath := range os.Args[2:] {
+		perLine := 10
 		name := strcase.ToLowerCamel(strings.Replace(path.Base(filePath), ".", "_", -1))
 
 		bytes, err := ioutil.ReadFile(filePath)
@@ -35,6 +34,10 @@ func main() {
 		fmt.Printf("	%s []byte = []byte{\n", name)
 
 		for i := 0; i < len(bytes); i = i + perLine {
+			if i+perLine > len(bytes) {
+				perLine = len(bytes) % perLine
+			}
+
 			fmt.Printf("		")
 			for i, b := range bytes[i : i+perLine] {
 				if i != 0 {
